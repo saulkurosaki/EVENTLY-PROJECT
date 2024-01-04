@@ -46,7 +46,7 @@ const EventDetails = async ({ params: { id } }: SearchParamProps) => {
           {/* CHECKOUT BUTTON */}
 
           {/* EVENT INFO */}
-          {/* <div className="flex flex-col gap-5">
+          <div className="flex flex-col gap-5">
             <div className="flex gap-2 md:gap-3">
               <Image
                 src="/assets/icons/calendar.svg"
@@ -75,7 +75,7 @@ const EventDetails = async ({ params: { id } }: SearchParamProps) => {
               />
               <p className="p-medium-16 lg:p-regular-20">{event.location}</p>
             </div>
-          </div> */}
+          </div>
 
           {/* EVENT DESCRIPTION */}
           {/* <div className="flex flex-col gap-2">
