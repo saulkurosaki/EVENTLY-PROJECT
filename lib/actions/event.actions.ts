@@ -103,45 +103,45 @@ export async function deleteEvent({ eventId, path }: DeleteEventParams) {
 }
 
 // GET ALL EVENTS
-// export async function getAllEvents({
-//   query,
-//   limit = 6,
-//   page,
-//   category,
-// }: GetAllEventsParams) {
-//   try {
-//     await connectToDatabase();
+export async function getAllEvents({
+  query,
+  limit = 6,
+  page,
+  category,
+}: GetAllEventsParams) {
+  try {
+    await connectToDatabase();
 
-//     const titleCondition = query
-//       ? { title: { $regex: query, $options: "i" } }
-//       : {};
-//     const categoryCondition = category
-//       ? await getCategoryByName(category)
-//       : null;
-//     const conditions = {
-//       $and: [
-//         titleCondition,
-//         categoryCondition ? { category: categoryCondition._id } : {},
-//       ],
-//     };
+    const titleCondition = query
+      ? { title: { $regex: query, $options: "i" } }
+      : {};
+    const categoryCondition = category
+      ? await getCategoryByName(category)
+      : null;
+    const conditions = {
+      $and: [
+        titleCondition,
+        categoryCondition ? { category: categoryCondition._id } : {},
+      ],
+    };
 
-//     const skipAmount = (Number(page) - 1) * limit;
-//     const eventsQuery = Event.find(conditions)
-//       .sort({ createdAt: "desc" })
-//       .skip(skipAmount)
-//       .limit(limit);
+    const skipAmount = (Number(page) - 1) * limit;
+    const eventsQuery = Event.find(conditions)
+      .sort({ createdAt: "desc" })
+      .skip(skipAmount)
+      .limit(limit);
 
-//     const events = await populateEvent(eventsQuery);
-//     const eventsCount = await Event.countDocuments(conditions);
+    const events = await populateEvent(eventsQuery);
+    const eventsCount = await Event.countDocuments(conditions);
 
-//     return {
-//       data: JSON.parse(JSON.stringify(events)),
-//       totalPages: Math.ceil(eventsCount / limit),
-//     };
-//   } catch (error) {
-//     handleError(error);
-//   }
-// }
+    return {
+      data: JSON.parse(JSON.stringify(events)),
+      totalPages: Math.ceil(eventsCount / limit),
+    };
+  } catch (error) {
+    handleError(error);
+  }
+}
 
 // GET EVENTS BY ORGANIZER
 export async function getEventsByUser({
